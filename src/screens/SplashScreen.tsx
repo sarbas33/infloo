@@ -4,15 +4,18 @@ import Svg, { Circle } from 'react-native-svg';
 
 const { width, height } = Dimensions.get('window');
 const scale = width / 360;
-
-const normalize = (size) => Math.round(PixelRatio.roundToNearestPixel(size * scale));
-
 const outerMostCircleRadius = ((width * 0.8) / 2) - 2;
 const outerCircleRadius = ((width * 0.5) / 2) - 2;
 
+const normalize = (size: number) => Math.round(PixelRatio.roundToNearestPixel(size * scale));
+
+const calculatePosition = (radius: number, angle: number, size: number): { bottom: number, left: number } => {
+  const bottom = radius * Math.sin((angle * Math.PI) / 180) - normalize(size / 2);
+  const left = radius * Math.cos((angle * Math.PI) / 180) - normalize(size / 2);
+  return { bottom, left };
+};
 
 const SplashScreen = () => {
-    
   return (
     <View style={styles.container}>
       <View style={styles.circleContainer}>
@@ -131,30 +134,12 @@ const styles = StyleSheet.create({
     top: (width / 2),
     backgroundColor: '#662235',
   },
-  profilePosition1: {
-    bottom: outerCircleRadius * Math.sin((40 * Math.PI) / 180) - normalize(30),
-    left: outerCircleRadius * Math.cos((40 * Math.PI) / 180) - normalize(30),
-  },
-  profilePosition2: {
-    bottom: outerCircleRadius * Math.sin((220 * Math.PI) / 180) - normalize(15),
-    left: outerCircleRadius * Math.cos((220 * Math.PI) / 180) - normalize(15),
-  },
-  profilePosition3: {
-    bottom: outerMostCircleRadius * Math.sin((325 * Math.PI) / 180) - normalize(30),
-    left: outerMostCircleRadius * Math.cos((325 * Math.PI) / 180) - normalize(30),
-  },
-  profilePosition4: {
-    bottom: outerMostCircleRadius * Math.sin((120 * Math.PI) / 180) - normalize(30),
-    left: outerMostCircleRadius * Math.cos((120 * Math.PI) / 180) - normalize(30),
-  },
-  profilePosition5: {
-    bottom: outerMostCircleRadius * Math.sin((80 * Math.PI) / 180) - normalize(15),
-    left: outerMostCircleRadius * Math.cos((80 * Math.PI) / 180) - normalize(15),
-  },
-  profilePosition6: {
-    bottom: outerMostCircleRadius * Math.sin((260 * Math.PI) / 180) - normalize(15),
-    left: outerMostCircleRadius * Math.cos((260 * Math.PI) / 180) - normalize(15),
-  },
+  profilePosition1: calculatePosition(outerCircleRadius, 40, 60),
+  profilePosition2: calculatePosition(outerCircleRadius, 220, 30),
+  profilePosition3: calculatePosition(outerMostCircleRadius, 325, 60),
+  profilePosition4: calculatePosition(outerMostCircleRadius, 120, 60),
+  profilePosition5: calculatePosition(outerMostCircleRadius, 80, 30),
+  profilePosition6: calculatePosition(outerMostCircleRadius, 260, 30),
   textContainer: {
     width: '100%',
     alignItems: 'center',
