@@ -5,20 +5,76 @@ import HomeScreen from '../screens/home/HomeScreen';
 import FavouritesScreen from '../screens/FavouritesScreen';
 import MessagesScreen from '../screens/MessagesScreen';
 import ProfileScreen from '../screens/ProfileScreen';
+import HomeIcon from '../assets/navigation/home.png';
+import FavouritesIcon from '../assets/navigation/favorite.png';
+import MessagesIcon from '../assets/navigation/chat.png';
+import ProfileIcon from '../assets/navigation/profile.png';
+import { Image, StyleSheet } from 'react-native';
 
 const Tab = createBottomTabNavigator();
 
 const AppNavigator: React.FC = () => {
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
-                <Tab.Screen name="Home" component={HomeScreen} />
-                <Tab.Screen name="Favourites" component={FavouritesScreen} />
-                <Tab.Screen name="Messages" component={MessagesScreen} />
-                <Tab.Screen name="Profile" component={ProfileScreen} />
+            <Tab.Navigator 
+                initialRouteName="Home" 
+                screenOptions={{ 
+                    headerShown: false,
+                    tabBarStyle: { 
+                        height: 64, 
+                        backgroundColor: '#FBFBFB',
+                        justifyContent: 'center' 
+                    } 
+                }}
+            >
+                <Tab.Screen 
+                    name="Home" 
+                    component={HomeScreen} 
+                    options={{ 
+                        tabBarIcon: () => (
+                            <Image source={HomeIcon} style={styles.icon} />
+                        ),
+                        tabBarLabel: () => null 
+                    }} 
+                />
+                <Tab.Screen 
+                    name="Favourites" 
+                    component={FavouritesScreen} 
+                    options={{ 
+                        tabBarIcon: () => <Image source={FavouritesIcon} style={styles.icon} />,
+                        tabBarLabel: () => null 
+                    }} 
+                />
+                <Tab.Screen 
+                    name="Messages" 
+                    component={MessagesScreen} 
+                    options={{ 
+                        tabBarIcon: () => <Image source={MessagesIcon} style={styles.icon} />,
+                        tabBarLabel: () => null 
+                    }} 
+                />
+                <Tab.Screen 
+                    name="Profile" 
+                    component={ProfileScreen} 
+                    options={{ 
+                        tabBarIcon: () => (
+                            <Image source={ProfileIcon} style={[styles.icon, { opacity: 0.6 }]} />
+                        ),
+                        tabBarLabel: () => null 
+                    }} 
+                />
             </Tab.Navigator>
         </NavigationContainer>
     );
 };
+
+const styles = StyleSheet.create({
+    icon: {
+        width: 32,
+        height: 32,
+        top: 15,
+        opacity: 0.6,
+    },
+});
 
 export default AppNavigator;
