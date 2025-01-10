@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, StyleSheet, Image, Dimensions, PixelRatio } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-
-const normalize = (size) => Math.round(PixelRatio.roundToNearestPixel(size * scale));
+import { normalize } from '../../../utils/utils';
 
 const { width } = Dimensions.get('window');
-const scale = width / 360;
 const outerMostCircleRadius = normalize(((width * 0.8) / 2) - 2);
 const outerCircleRadius = normalize(((width * 0.5) / 2) - 2);
 

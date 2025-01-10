@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { normalize } from '../../../utils/utils';
 
 const Events: React.FC = () => {
   return (
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#f8f8f8',
   },
   text: {
-    fontSize: 18,
+    fontSize: normalize(18),
     fontWeight: 'bold',
     color: '#666',
   },

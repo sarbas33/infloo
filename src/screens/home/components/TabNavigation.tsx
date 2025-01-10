@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import Svg, { Path } from 'react-native-svg';
+import { normalize } from '../../../utils/utils';
 
 interface TabNavigationProps {
   activeTab: 'Explore' | 'Events';
@@ -38,22 +39,19 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 10,
-    elevation: 3,
+    paddingVertical: normalize(10),
+    elevation: normalize(3),
   },
   tab: {
-    paddingVertical: 10,
+    paddingVertical: normalize(10),
     width: '45%',
-    //margin: '2.5%',
-    alignItems: 'center',
-    //margin: 10,
-    borderRadius: 5,
+    borderRadius: normalize(5),
   },
   activeTab: {
     //backgroundColor: '#007bff',
   },
   tabText: {
-    fontSize: 16,
+    fontSize: normalize(16),
     fontWeight: 'bold',
     color: '#000',
     textAlign: 'center'

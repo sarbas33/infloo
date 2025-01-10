@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity, Text } from 'react-native';
+import { normalize } from '../../../utils/utils';
 
 const categories = [
   { icon: require('../assets/icons/technology.png'), label: 'Technology' },
@@ -25,19 +26,19 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    padding: 10,
+    padding: normalize(10),
   },
   iconContainer: {
     alignItems: 'center',
   },
   icon: {
-    width: 40,
-    height: 40,
+    width: normalize(40),
+    height: normalize(40),
     resizeMode: 'contain',
   },
   label: {
-    marginTop: 5,
-    fontSize: 12,
+    marginTop: normalize(5),
+    fontSize: normalize(12),
     color: '#333',
   },
 });

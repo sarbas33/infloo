@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import HorizontalCard from './HorizontalCard';
 import VerticalCard from './VerticalCard';
+import { normalize } from '../../../utils/utils';
 
 interface SectionProps {
   title: string;
@@ -57,13 +58,13 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
 
 const styles = StyleSheet.create({
   section: {
-    marginVertical: 10,
-    paddingHorizontal: 10,
+    marginVertical: normalize(10),
+    paddingHorizontal: normalize(10),
   },
   title: {
-    fontSize: 18,
+    fontSize: normalize(18),
     fontWeight: 'bold',
-    marginBottom: 10,
+    marginBottom: normalize(10),
   },
 });
 

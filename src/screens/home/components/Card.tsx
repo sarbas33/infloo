@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native';
+import { normalize } from '../../../utils/utils';
 
 interface CardProps {
   name: string;
@@ -38,55 +39,55 @@ const Card: React.FC<CardProps> = ({ name, profession, avatar, domainImage, type
 const styles = StyleSheet.create({
   card: {
     backgroundColor: '#fff',
-    borderRadius: 10,
-    marginBottom: 10,
-    elevation: 3,
-    width: 250, // Same width for both card types
+    borderRadius: normalize(10),
+    marginBottom: normalize(10),
+    elevation: normalize(3),
+    width: normalize(250),
   },
   horizontalCard: {
-    height: 200, // Larger height for horizontal cards
+    height: normalize(200),
   },
   verticalCard: {
-    height: 150, // Smaller height for vertical cards
+    height: normalize(150),
   },
   domainImage: {
     width: '100%',
-    height: '37.5%', // Top part for horizontal cards
-    borderTopLeftRadius: 10,
-    borderTopRightRadius: 10,
+    height: '37.5%',
+    borderTopLeftRadius: normalize(10),
+    borderTopRightRadius: normalize(10),
   },
   content: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    padding: normalize(10),
   },
   profileImage: {
-    width: 88,
-    height: 60,
+    width: normalize(88),
+    height: normalize(60),
     resizeMode: 'cover',
-    borderRadius: 5,
-    marginRight: 10,
+    borderRadius: normalize(5),
+    marginRight: normalize(10),
   },
   textContainer: {
     flex: 1,
   },
   name: {
-    fontSize: 16,
+    fontSize: normalize(16),
     fontWeight: 'bold',
   },
   profession: {
-    fontSize: 14,
+    fontSize: normalize(14),
     color: '#666',
   },
   favoriteButton: {
     position: 'absolute',
-    right: 10,
-    top: '50%', // Align with the center of the card
+    right: normalize(10),
+    top: '50%',
   },
   favoriteIcon: {
-    width: 24,
-    height: 24,
+    width: normalize(24),
+    height: normalize(24),
     tintColor: '#333',
   },
 });

@@ -1,11 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions, PixelRatio } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
 import CircularNetworkDiagram from './components/CircularNetworkDiagram';
+import { normalize } from '../../utils/utils';
 
 const { width, height } = Dimensions.get('window');
-const scale = width / 360;
-
-const normalize = (size) => Math.round(PixelRatio.roundToNearestPixel(size * scale));
 
 const SplashScreen = () => {
   return (

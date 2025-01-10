@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { normalize } from '../../../utils/utils';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -34,47 +35,47 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ name, profession, avata
 
 const styles = StyleSheet.create({
   card: {
-    width: screenWidth - 20, // Full width with some padding
+    width: screenWidth - normalize(20),
     backgroundColor: '#fff',
-    borderRadius: 10,
-    marginVertical: 10,
+    borderRadius: normalize(10),
+    marginVertical: normalize(10),
     overflow: 'hidden',
-    elevation: 3,
+    elevation: normalize(3),
   },
   domainImage: {
     width: '100%',
-    height: 150, // Top section for domain image
+    height: normalize(150),
   },
   content: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    padding: normalize(10),
   },
   profileImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 5,
-    marginRight: 10,
+    width: normalize(60),
+    height: normalize(60),
+    borderRadius: normalize(5),
+    marginRight: normalize(10),
   },
   textContainer: {
     flex: 1,
   },
   name: {
-    fontSize: 16,
+    fontSize: normalize(16),
     fontWeight: 'bold',
   },
   profession: {
-    fontSize: 14,
+    fontSize: normalize(14),
     color: '#666',
   },
   favoriteButton: {
     position: 'absolute',
-    right: 10,
+    right: normalize(10),
     top: '50%',
   },
   favoriteIcon: {
-    width: 24,
-    height: 24,
+    width: normalize(24),
+    height: normalize(24),
     tintColor: '#333',
   },
 });

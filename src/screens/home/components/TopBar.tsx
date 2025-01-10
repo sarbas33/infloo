@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { normalize } from '../../../utils/utils';
 
 const TopBar: React.FC = () => {
   return (
@@ -24,25 +25,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
+    padding: normalize(10),
     backgroundColor: '#fff',
   },
   icon: {
-    width: 24,
-    height: 24,
+    width: normalize(24),
+    height: normalize(24),
     resizeMode: 'contain',
   },
   circleIconContainer: {
     backgroundColor: 'blue',
-    width: 24,
-    height: 24,
-    borderRadius: 12,
+    width: normalize(24),
+    height: normalize(24),
+    borderRadius: normalize(12),
     justifyContent: 'center',
     alignItems: 'center',
   },
   rightIcons: {
     flexDirection: 'row',
-    gap: 10,
+    gap: normalize(10),
   },
 });
 

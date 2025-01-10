@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import { normalize } from '../../../utils/utils';
 
 const screenWidth = Dimensions.get('window').width;
 
@@ -30,21 +31,21 @@ const VerticalCard: React.FC<VerticalCardProps> = ({ name, profession, avatar, i
 
 const styles = StyleSheet.create({
   card: {
-    width: screenWidth - 20, // Full width with some padding
-    height: 80,
+    width: screenWidth - normalize(20),
+    height: normalize(80),
     backgroundColor: '#fff',
-    borderRadius: 10,
-    marginVertical: 10,
+    borderRadius: normalize(10),
+    marginVertical: normalize(10),
     flexDirection: 'row',
     alignItems: 'center',
-    elevation: 3,
+    elevation: normalize(3),
   },
   profileImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    marginRight: 13,
-    marginLeft: 15,
+    width: normalize(60),
+    height: normalize(60),
+    borderRadius: normalize(30),
+    marginRight: normalize(13),
+    marginLeft: normalize(15),
   },
   content: {
     flex: 1,
@@ -52,22 +53,22 @@ const styles = StyleSheet.create({
   name: {
     fontFamily: 'Poppins-Bold',
     fontWeight: '600',
-    fontSize: 14,
-    lineHeight: 21,
+    fontSize: normalize(14),
+    lineHeight: normalize(21),
   },
   profession: {
     fontFamily: 'Poppins-Regular',
     fontWeight: '400',
-    fontSize: 10,
-    lineHeight: 15,
+    fontSize: normalize(10),
+    lineHeight: normalize(15),
   },
   favoriteButton: {
     position: 'absolute',
-    right: 10,
+    right: normalize(10),
   },
   favoriteIcon: {
-    width: 36,
-    height: 36,
+    width: normalize(36),
+    height: normalize(36),
   },
 });
 
