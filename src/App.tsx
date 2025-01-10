@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import AppNavigator from './navigation/AppNavigator';
-import SplashScreen from './screens/SplashScreen';
+import SplashScreen from './screens/login/SplashScreen';
 import { enableScreens } from 'react-native-screens';
    enableScreens();
 

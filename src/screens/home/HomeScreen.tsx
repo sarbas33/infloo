@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { View, StyleSheet } from 'react-native';
-import TopBar from '../components/TopBar';
-import CategoryIcons from '../components/CategoryIcons';
-import TabNavigation from '../components/TabNavigation';
-import Explore from '../components/Explore';
-import Events from '../components/Events';
+import TopBar from './components/TopBar';
+import CategoryIcons from './components/CategoryIcons';
+import TabNavigation from './components/TabNavigation';
+import Explore from './components/Explore';
+import Events from './components/Events';
 
 const HomeScreen: React.FC = () => {
   const [activeTab, setActiveTab] = useState<'Explore' | 'Events'>('Explore');

@@ -20,7 +20,7 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
       name: 'Ashna Jeev',
       profession: 'Brand Creator',
       avatar: require('../assets/icons/user.png'),
-      domainImage: require('../assets/icons/travel.png'),
+      domainImage: require('../assets/icons/profilebg.png'),
     },
   ];
 
