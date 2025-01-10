@@ -6,7 +6,7 @@ import { enableScreens } from 'react-native-screens';
    enableScreens();
 
 const App: React.FC = () => {
-    const isLoggedIn = false; // Set to false for initial state
+    const isLoggedIn = true; // Set to false for initial state
 
     return (
         <View style={{ flex: 1 }}>

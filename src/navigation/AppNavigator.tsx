@@ -11,7 +11,7 @@ const Tab = createBottomTabNavigator();
 const AppNavigator: React.FC = () => {
     return (
         <NavigationContainer>
-            <Tab.Navigator initialRouteName="Home">
+            <Tab.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
                 <Tab.Screen name="Home" component={HomeScreen} />
                 <Tab.Screen name="Favourites" component={FavouritesScreen} />
                 <Tab.Screen name="Messages" component={MessagesScreen} />
