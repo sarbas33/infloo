@@ -1,6 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import HorizontalCard from './HorizontalCard';
+import { View, Text, StyleSheet } from 'react-native';
+import HorizontalCardList from './HorizontalCard';
 import VerticalCard from './VerticalCard';
 import { normalize } from '../../../utils/utils';
 
@@ -29,17 +29,7 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
     <View style={styles.section}>
       <Text style={styles.title}>{title}</Text>
       {type === 'horizontal' ? (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {data.map((item, index) => (
-            <HorizontalCard
-              key={index}
-              name={item.name}
-              profession={item.profession}
-              avatar={item.avatar}
-              domainImage={item.domainImage}
-            />
-          ))}
-        </ScrollView>
+        <HorizontalCardList data={data} />
       ) : (
         <View>
           {data.map((item, index) => (
@@ -62,8 +52,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: normalize(10),
   },
   title: {
-    fontSize: normalize(18),
-    fontWeight: 'bold',
+    fontSize: normalize(14),
+    fontFamily: 'Poppins-Bold',
+    lineHeight: normalize(21),
     marginBottom: normalize(10),
   },
 });

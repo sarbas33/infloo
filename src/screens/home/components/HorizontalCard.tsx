@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions, FlatList } from 'react-native';
 import { normalize } from '../../../utils/utils';
 
 const screenWidth = Dimensions.get('window').width;
@@ -33,12 +33,53 @@ const HorizontalCard: React.FC<HorizontalCardProps> = ({ name, profession, avata
   );
 };
 
+interface HorizontalCardListProps {
+  data: HorizontalCardProps[];
+}
+
+const HorizontalCardList: React.FC<HorizontalCardListProps> = ({ data }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const flatListRef = useRef<FlatList>(null);
+
+  const handleScroll = (event: any) => {
+    const offsetX = event.nativeEvent.contentOffset.x;
+    const index = Math.round(offsetX / screenWidth);
+    setCurrentIndex(index);
+  };
+
+  return (
+    <View>
+      <FlatList
+        ref={flatListRef}
+        data={data}
+        keyExtractor={(item, index) => index.toString()}
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        pagingEnabled
+        onScroll={handleScroll}
+        renderItem={({ item }) => <HorizontalCard {...item} />}
+      />
+      <View style={styles.paginationContainer}>
+        {data.map((_, index) => (
+          <View
+            key={index}
+            style={[
+              styles.dot,
+              currentIndex === index && styles.activeDot,
+            ]}
+          />
+        ))}
+      </View>
+    </View>
+  );
+};
+
 const styles = StyleSheet.create({
   card: {
     width: screenWidth - normalize(20),
     backgroundColor: '#fff',
     borderRadius: normalize(10),
-    marginVertical: normalize(10),
+    marginHorizontal: normalize(10),
     overflow: 'hidden',
     elevation: normalize(3),
   },
@@ -78,6 +119,21 @@ const styles = StyleSheet.create({
     height: normalize(24),
     tintColor: '#333',
   },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: normalize(10),
+  },
+  dot: {
+    width: normalize(8),
+    height: normalize(8),
+    borderRadius: normalize(4),
+    backgroundColor: '#ccc',
+    marginHorizontal: normalize(4),
+  },
+  activeDot: {
+    backgroundColor: '#333',
+  },
 });
 
-export default HorizontalCard;
+export default HorizontalCardList;

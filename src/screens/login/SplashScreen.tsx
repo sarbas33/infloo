@@ -1,14 +1,20 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions } from 'react-native';
-import CircularNetworkDiagram from './components/CircularNetworkDiagram';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import { normalize } from '../../utils/utils';
 
 const { width, height } = Dimensions.get('window');
 
 const SplashScreen = () => {
+  const navigation = useNavigation();
+
   return (
     <View style={styles.container}>
-      <CircularNetworkDiagram/>
+      <Image
+        source={require('../../assets/images/login/networkdiagram.png')}
+        style={styles.networkDiagram}
+        resizeMode="contain"
+      />
 
       <View style={styles.contentContainer}>
         <View style={styles.textContainer}>
@@ -20,9 +26,14 @@ const SplashScreen = () => {
       </View>
 
       <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button}>
-          <Text style={styles.buttonText}>Login with phone</Text>
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <Image
+            source={require('../../assets/images/login/loginbutton.png')}
+            style={styles.loginButtonImage}
+            resizeMode="contain"
+          />
         </TouchableOpacity>
+
         <Text style={styles.signUpText}>
           Don’t have an account? <Text style={styles.signUpLink}>Sign Up</Text>
         </Text>
@@ -38,6 +49,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingHorizontal: normalize(20),
+  },
+  networkDiagram: {
+    width: width * 0.9,
+    height: width * 0.9,
+    position: 'absolute',
+    top: width * 0.2,
+    marginBottom: normalize(30),
+  },
+  contentContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: normalize(30),
+    position: 'absolute',
+    top: width + ((height - width) / 4) //- normalize(50),
   },
   textContainer: {
     width: '100%',
@@ -61,20 +86,23 @@ const styles = StyleSheet.create({
     color: '#6b7280',
     paddingHorizontal: '5%',
   },
-  button: {
-    backgroundColor: '#1e3a8a',
-    paddingVertical: normalize(15),
-    width: '100%',
-    borderRadius: normalize(30),
+  buttonContainer: {
+    position: 'absolute',
+    bottom: normalize(50),
     alignItems: 'center',
-    marginBottom: normalize(15),
+    width: '100%',
   },
-  buttonText: {
-    fontFamily: 'Poppins-Bold',
-    fontSize: normalize(14),
-    lineHeight: normalize(21),
-    textAlign: 'center',
-    color: '#fff',
+  button: { 
+    borderWidth: 1, 
+    borderColor: 'transparent', 
+    width: width * 0.9, 
+    height: width * 0.14, 
+    marginBottom: normalize(10),
+  },
+  loginButtonImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: normalize(30),
   },
   signUpText: {
     fontFamily: 'Poppins-Regular',
@@ -84,19 +112,6 @@ const styles = StyleSheet.create({
   signUpLink: {
     fontFamily: 'Poppins-Bold',
     color: '#1e3a8a',
-  },
-  contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: normalize(30),
-    position: 'absolute',
-    top: width + (height - width) / 4 - normalize(50),
-  },
-  buttonContainer: {
-    position: 'absolute',
-    bottom: normalize(50),
-    alignItems: 'center',
-    width: '100%',
   },
 });
 
