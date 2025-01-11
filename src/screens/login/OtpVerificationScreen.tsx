@@ -16,7 +16,7 @@ import {
 } from 'react-native';
 import CustomButton from './components/CustomButton';
 import { normalize } from '../../utils/utils';
-import { sendOtp, sendOtpEmail } from '../../services/authService';
+import { sendOtp, sendOtpEmail, verifyOtp } from '../../services/authService';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -71,10 +71,15 @@ const OtpVerificationScreen = ({ route }) => {
     }
   };
 
-  const handleVerifyOtp = () => {
+  const handleVerifyOtp = async () => {
     const enteredOtp = otp.join('');
     if (enteredOtp.length === 4) {
-      Alert.alert('OTP Verified', `Entered OTP: ${enteredOtp}`);
+      const response = await verifyOtp(enteredOtp);
+      if (response?.success == true){
+        Alert.alert('Success', 'Main pages coming soon');
+      } else {
+        Alert.alert('Wrong OTP', 'Please try again!');
+      }
     } else {
       Alert.alert('Invalid OTP', 'Please enter all 4 digits.');
     }
