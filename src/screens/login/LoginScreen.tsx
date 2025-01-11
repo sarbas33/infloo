@@ -6,6 +6,7 @@ import CustomButton from './components/CustomButton';
 import { sendOtp } from '../../services/authService';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import CountryCodePicker from './components/CountryCodePicker'; 
+import { GoogleLogin } from '../../services/googleLogin';
 
 const { width } = Dimensions.get('window');
 
@@ -21,6 +22,18 @@ const LoginScreen: React.FC = () => {
     setCallingCode(newCallingCode);
   };
 
+  const handleGoogleLogin = async () => {
+		try {
+			const response = await GoogleLogin();
+      if (response?.type == "success"){
+        const email = response.data.user.email;
+        navigation.navigate('OtpVerification', { type: 'email', phoneNumber, callingCode, email });
+      }
+      console.log(response?.type);
+		} catch (apiError) {
+		} finally {
+		}
+  }  
   const handleSendOtp = async () => {
     if (!phoneNumber) {
       Alert.alert('Error', 'Please enter a phone number.');
@@ -38,8 +51,7 @@ const LoginScreen: React.FC = () => {
     try {
       const response = await sendOtp(callingCode, phoneNumber);
       if (response.success) {
-        console.log(phoneNumber);
-        navigation.navigate('OtpVerification', { phoneNumber, callingCode });
+        navigation.navigate('OtpVerification', { type: "mobile" , phoneNumber , callingCode , email:"none" });
       } else {
         Alert.alert('Failed to send OTP. Please try again.');
       }
@@ -80,7 +92,7 @@ const LoginScreen: React.FC = () => {
           resizeMode="contain"
         />
         <CustomButton onPress={() => {}} imageSrc={require('../../assets/images/login/facebook.png')} />
-        <CustomButton onPress={() => {}} imageSrc={require('../../assets/images/login/google.png')} />
+        <CustomButton onPress={handleGoogleLogin} imageSrc={require('../../assets/images/login/google.png')} />
         <Text style={styles.signUpText}>
           Don’t have an account? <Text style={styles.signUpLink}>Sign Up</Text>
         </Text>

@@ -1,15 +1,30 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, TouchableOpacity, Alert, Dimensions } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  Image,
+  TouchableOpacity,
+  Alert,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  Keyboard,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import CustomButton from './components/CustomButton';
 import { normalize } from '../../utils/utils';
-import { sendOtp } from '../../services/authService';
+import { sendOtp, sendOtpEmail } from '../../services/authService';
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const { width } = Dimensions.get('window');
 
 const OtpVerificationScreen = ({ route }) => {
   const navigation = useNavigation();
-  const { phoneNumber, callingCode } = route.params;
+  const { type, phoneNumber, callingCode, email } = route.params;
   const [otp, setOtp] = useState(['', '', '', '']);
 
   const handleInputChange = (index, value) => {
@@ -23,11 +38,31 @@ const OtpVerificationScreen = ({ route }) => {
   };
 
   const handleResendOtp = async () => {
+    setOtp(['', '', '', '']);
+    inputs[0]?.focus();
+    if (type === 'mobile') {
+      resendOtpMobile();
+    } else {
+      resendOtpEmail();
+    }
+  };
+
+  const resendOtpMobile = async () => {
     try {
       const response = await sendOtp(callingCode, phoneNumber);
-      if (response.success) {
-        //
-      } else {
+      if (!response.success) {
+        Alert.alert('Failed to send OTP. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      Alert.alert('An error occurred. Please try again.');
+    }
+  };
+
+  const resendOtpEmail = async () => {
+    try {
+      const response = await sendOtpEmail(email);
+      if (!response.success) {
         Alert.alert('Failed to send OTP. Please try again.');
       }
     } catch (error) {
@@ -39,13 +74,12 @@ const OtpVerificationScreen = ({ route }) => {
   const handleVerifyOtp = () => {
     const enteredOtp = otp.join('');
     if (enteredOtp.length === 4) {
-      // Perform OTP verification
       Alert.alert('OTP Verified', `Entered OTP: ${enteredOtp}`);
     } else {
       Alert.alert('Invalid OTP', 'Please enter all 4 digits.');
     }
   };
-  
+
   const handleKeyPress = (index, key) => {
     if (key === 'Backspace' && index > 0) {
       const prevInput = index - 1;
@@ -53,63 +87,98 @@ const OtpVerificationScreen = ({ route }) => {
     }
   };
 
+  const dismissKeyboard = () => {
+    Keyboard.dismiss();
+  };
+
   const inputs = [];
 
   return (
-    <View style={styles.container}>
-      <Image
-        source={require('../../assets/images/login/verificationcode.png')}
-        style={styles.topImage}
-        resizeMode="contain"
-      />
-      <Text style={styles.titleText}>Verification Code</Text>
-      <Text style={styles.instructionText}>
-        Enter the OTP sent to 
-        <Text style={styles.mobileNumber}> {callingCode} {phoneNumber}</Text>
-      </Text>
-      <View style={styles.otpContainer}>
-        {otp.map((digit, index) => (
-          <TextInput
-            key={index}
-            style={styles.otpInput}
-            keyboardType="number-pad"
-            maxLength={1}
-            value={digit}
-            onChangeText={(value) => handleInputChange(index, value)}
-            onKeyPress={({ nativeEvent }) => handleKeyPress(index, nativeEvent.key)}
-            ref={(ref) => (inputs[index] = ref)}
+    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <ScrollView
+          contentContainerStyle={styles.container}
+          keyboardShouldPersistTaps="handled"
+        >
+          {/* Back Button */}
+          <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
+            <Icon name="chevron-back" size={normalize(16)} style={styles.backButtonIcon} />
+          </TouchableOpacity>
+
+          <Image
+            source={require('../../assets/images/login/verificationcode.png')}
+            style={styles.topImage}
+            resizeMode="contain"
           />
-        ))}
-      </View>
-      <TouchableOpacity onPress={handleResendOtp}>
-        <Text style={styles.resendText}>
-          Didn’t receive OTP? 
-          <Text style={styles.resendLink}> RESEND OTP</Text>
-        </Text>
-      </TouchableOpacity>
-      <CustomButton onPress={handleVerifyOtp} imageSrc={require('../../assets/images/login/verifybutton.png')} />
-    </View>
+          <Text style={styles.titleText}>Verification Code</Text>
+          <Text style={styles.instructionText}>
+            Enter the OTP sent to{' '}
+            {type === 'mobile' && (
+              <Text style={styles.mobileNumber}>
+                {callingCode} {phoneNumber}
+              </Text>
+            )}
+            {type === 'email' && <Text style={styles.mobileNumber}>********@gmail.com</Text>}
+          </Text>
+          <View style={styles.otpContainer}>
+            {otp.map((digit, index) => (
+              <TextInput
+                key={index}
+                style={styles.otpInput}
+                keyboardType="number-pad"
+                maxLength={1}
+                value={digit}
+                onChangeText={(value) => handleInputChange(index, value)}
+                onKeyPress={({ nativeEvent }) => handleKeyPress(index, nativeEvent.key)}
+                ref={(ref) => (inputs[index] = ref)}
+              />
+            ))}
+          </View>
+          <TouchableOpacity onPress={handleResendOtp}>
+            <Text style={styles.resendText}>
+              Didn’t receive OTP? <Text style={styles.resendLink}>RESEND OTP</Text>
+            </Text>
+          </TouchableOpacity>
+          <CustomButton onPress={handleVerifyOtp} imageSrc={require('../../assets/images/login/verifybutton.png')} />
+        </ScrollView>
+      </KeyboardAvoidingView>
+    </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
     backgroundColor: '#ffffff',
     alignItems: 'center',
     paddingHorizontal: normalize(20),
   },
+  backButton: {
+    position: 'absolute',
+    top: normalize(20),
+    left: normalize(20),
+    width: normalize(16),
+    height: normalize(16),
+    zIndex: 1,
+  },
+  backButtonIcon: {
+    color: '#000',
+    fontWeight: 'bold',
+    transform: [{ scaleY: 1.2 }],
+  },
   topImage: {
     width: width * 0.8,
     height: width * 0.8,
-    marginTop: normalize(40),
+    marginTop: normalize(60),
     marginBottom: normalize(30),
   },
   titleText: {
     fontSize: normalize(20),
     fontFamily: 'Poppins-SemiBold',
     color: '#000000',
-    //marginBottom: normalize(10),
     lineHeight: normalize(30),
   },
   instructionText: {

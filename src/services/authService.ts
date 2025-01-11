@@ -15,3 +15,12 @@ export const sendOtp = async (countryCode: string, phoneNumber: string): Promise
     return { success: false, message: 'Failed to send OTP' };
   }
 };
+
+export const sendOtpEmail = async (email: string): Promise<OtpResponse> => {
+  try {
+    return {success: true};
+  } catch (error) {
+    console.error('Error sending OTP:', error);
+    return { success: false, message: 'Failed to send OTP' };
+  }
+};
