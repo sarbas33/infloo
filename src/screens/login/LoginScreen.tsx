@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import CustomButton from './components/CustomButton';
 import { sendOtp } from '../../services/authService';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
-import CountryCodePicker from './components/CountryCodePicker'; // Import CountryCodePicker component
+import CountryCodePicker from './components/CountryCodePicker'; 
 
 const { width } = Dimensions.get('window');
 

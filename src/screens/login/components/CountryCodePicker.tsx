@@ -14,7 +14,7 @@ const CountryCodePicker: React.FC<CountryCodePickerProps> = ({ countryCode, call
 
   const handleSelect = (selectedCountry: Country) => {
     const selectedCountryCode = selectedCountry.cca2;
-    const selectedCallingCode = `+${selectedCountry.callingCode}`;
+    const selectedCallingCode = `${+selectedCountry.callingCode}`;
     onSelect(selectedCountryCode, selectedCallingCode);
     setIsPickerVisible(false);
   };
