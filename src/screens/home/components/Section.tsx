@@ -14,14 +14,14 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
     {
       name: 'James Carlo',
       profession: 'Video Creator',
-      avatar: require('../assets/icons/user.png'),
+      avatar: require('../assets/icons/user.jpg'),
       domainImage: require('../assets/icons/technology.png'),
     },
     {
       name: 'Ashna Jeev',
       profession: 'Brand Creator',
-      avatar: require('../assets/icons/user.png'),
-      domainImage: require('../assets/icons/profilebg.png'),
+      avatar: require('../assets/icons/user.jpg'),
+      domainImage: require('../assets/icons/profilebg.jpg'),
     },
   ];
 
