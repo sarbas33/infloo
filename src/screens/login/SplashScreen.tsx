@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { normalize } from '../../utils/utils';
+import LinkToSignup from './components/LinkToSignup'
 
 const { width, height } = Dimensions.get('window');
 
@@ -33,10 +34,10 @@ const SplashScreen = () => {
             resizeMode="contain"
           />
         </TouchableOpacity>
-
-        <Text style={styles.signUpText}>
-          Don’t have an account? <Text style={styles.signUpLink}>Sign Up</Text>
-        </Text>
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>Don’t have an account? </Text>
+          <LinkToSignup />
+        </View>
       </View>
     </View>
   );
@@ -103,6 +104,12 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: normalize(30),
+  },
+  signUpContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: normalize(10),
   },
   signUpText: {
     fontFamily: 'Poppins-Regular',

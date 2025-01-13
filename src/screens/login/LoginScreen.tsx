@@ -7,6 +7,7 @@ import { sendOtp } from '../../services/authService';
 import { parsePhoneNumberFromString } from 'libphonenumber-js';
 import CountryCodePicker from './components/CountryCodePicker'; 
 import { GoogleLogin } from '../../services/googleLogin';
+import LinkToSignup from './components/LinkToSignup';
 
 const { width } = Dimensions.get('window');
 
@@ -92,10 +93,11 @@ const LoginScreen: React.FC = () => {
           resizeMode="contain"
         />
         <CustomButton onPress={() => {}} imageSrc={require('../../assets/images/login/facebook.png')} />
-        <CustomButton onPress={handleGoogleLogin} imageSrc={require('../../assets/images/login/google.png')} />
-        <Text style={styles.signUpText}>
-          Don’t have an account? <Text style={styles.signUpLink}>Sign Up</Text>
-        </Text>
+        <CustomButton onPress={() => {}} imageSrc={require('../../assets/images/login/google.png')} />
+        <View style={styles.signUpContainer}>
+          <Text style={styles.signUpText}>Don’t have an account?</Text>
+          <LinkToSignup />
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -148,16 +150,19 @@ const styles = StyleSheet.create({
     marginTop: normalize(40),
     marginVertical: normalize(30),
   },
-  signUpText: {
+  signUpContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: normalize(10),
     position: 'absolute',
     bottom: normalize(30),
+  },
+  signUpText: {
     fontFamily: 'Poppins-Regular',
     fontSize: normalize(14),
     color: '#6b7280',
-  },
-  signUpLink: {
-    fontFamily: 'Poppins-Bold',
-    color: '#1e3a8a',
+    marginRight: normalize(5),
   },
 });
 
