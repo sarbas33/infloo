@@ -36,7 +36,7 @@ const EnterNumberScreen = ({ route }) => {
       try {
         const response = await sendOtp(callingCode, phoneNumber);
         if (response.success) {
-          navigation.navigate('OtpVerification', { type: "mobile" , phoneNumber , callingCode , email:"none" });
+          navigation.navigate('OtpVerification2', { type: "mobile" , phoneNumber , callingCode , email:"none", userType: userType });
         } else {
           Alert.alert('Failed to send OTP. Please try again.');
         }

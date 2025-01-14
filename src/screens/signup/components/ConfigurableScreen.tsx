@@ -4,7 +4,7 @@ import { normalize } from '../../../utils/utils';
 import ContinueButton from './ContinueButton'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 interface ConfigurableScreenProps {
   topImage?: any; // Image at the top
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   topImage: {
     width: width * 0.6,
     height: width * 0.6,
-    marginTop: normalize(40),
+    marginTop: height * 0.04,
     marginBottom: normalize(20),
   },
   titleText: {
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
   bottomContainer: {
     width: width,
     position: 'absolute',
-    bottom: normalize(40),
+    bottom: height * 0.04,
     alignItems: 'center',
   },
   bottomButtonImage: {

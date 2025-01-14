@@ -8,6 +8,7 @@ import EnterNameScreen from '../screens/signup/EnterNameScreen';
 import EnterEmailScreen from '../screens/signup/EnterEmailScreen';
 import EnterNumberScreen from '../screens/signup/EnterNumberScreen';
 import OtpVerificationScreen from '../screens/login/OtpVerificationScreen';
+import OtpVerificationScreen2 from '../screens/signup/OtpVerificationScreen2';
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,11 @@ const LoginNavigator = () => {
         <Stack.Screen
           name="OtpVerification"
           component={OtpVerificationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="OtpVerification2"
+          component={OtpVerificationScreen2}
           options={{ headerShown: false }}
         />
         <Stack.Screen

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, KeyboardAvoidingView, TouchableOpacity, StyleSheet, TextInput } from 'react-native';
+import { View, KeyboardAvoidingView, TouchableOpacity, StyleSheet, TextInput, Alert } from 'react-native';
 import ConfigurableScreen from './components/ConfigurableScreen';
 import { normalize } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
@@ -12,9 +12,11 @@ const EnterEmailScreen = ({ route }) => {
 
   const handleContinue = () => {
     if (name != "") {
+      Alert.alert("More pages coming soon");
+      return;
       navigation.navigate('NextScreen', { userType: userType, name: name });
     } else {
-      alert('Enter a name');
+      alert('Enter an email');
     }
   };
 

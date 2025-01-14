@@ -2,7 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { normalize } from '../../utils/utils';
-import LinkToSignup from './components/LinkToSignup'
+import LinkToSignup from './components/LinkToSignup';
 
 const { width, height } = Dimensions.get('window');
 
@@ -16,16 +16,12 @@ const SplashScreen = () => {
         style={styles.networkDiagram}
         resizeMode="contain"
       />
-
-      <View style={styles.contentContainer}>
-        <View style={styles.textContainer}>
-          <Text style={styles.appTitle}>Uncover Success Where Your Journey Begins</Text>
-          <Text style={styles.subtitle}>
-            Drive growth with influencers. Elevate your brand through strategic partnerships.
-          </Text>
-        </View>
+      <View style={styles.textContainer}>
+        <Text style={styles.appTitle}>Uncover Success Where Your Journey Begins</Text>
+        <Text style={styles.subtitle}>
+          Drive growth with influencers. Elevate your brand through strategic partnerships.
+        </Text>
       </View>
-
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Login')}>
           <Image
@@ -47,28 +43,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
     paddingHorizontal: normalize(20),
+    justifyContent: 'space-around',
+    alignItems: 'center',
   },
   networkDiagram: {
     width: width * 0.9,
     height: width * 0.9,
-    position: 'absolute',
-    top: width * 0.2,
-    marginBottom: normalize(30),
-  },
-  contentContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: normalize(30),
-    position: 'absolute',
-    top: width + ((height - width) / 4) //- normalize(50),
+    marginTop: height * 0.05,
   },
   textContainer: {
-    width: '100%',
     alignItems: 'center',
-    marginBottom: normalize(30),
+    justifyContent: 'center',
+    marginVertical: height * 0.02,
   },
   appTitle: {
     fontFamily: 'Poppins-Bold',
@@ -88,17 +75,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: '5%',
   },
   buttonContainer: {
-    position: 'absolute',
-    bottom: normalize(50),
     alignItems: 'center',
-    width: '100%',
+    marginBottom: height * 0.02,
   },
-  button: { 
-    borderWidth: 1, 
-    borderColor: 'transparent', 
-    width: width * 0.9, 
-    height: width * 0.14, 
-    marginBottom: normalize(10),
+  button: {
+    borderWidth: 1,
+    borderColor: 'transparent',
+    width: width * 0.9,
+    height: width * 0.14,
   },
   loginButtonImage: {
     width: '100%',
@@ -115,10 +99,6 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     fontSize: normalize(14),
     color: '#6b7280',
-  },
-  signUpLink: {
-    fontFamily: 'Poppins-Bold',
-    color: '#1e3a8a',
   },
 });
 
