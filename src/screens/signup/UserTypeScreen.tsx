@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import ConfigurableScreen from './components/ConfigurableScreen';
 import { normalize } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
-import Icon from 'react-native-vector-icons/Ionicons';
-import ContinueButton from './components/ContinueButton'; // Import the new component
 
-const { width } = Dimensions.get('window');
-
-const UserTypeScreen = ({ route }) => {
+const UserTypeScreen = () => {
   const navigation = useNavigation();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
+
+  const options = ['Hire an Influencer', 'Creating an Influencer Profile', 'Create a Brand Profile'];
 
   const handleSelect = (option: string) => {
     setSelectedOption(option);
@@ -17,35 +16,14 @@ const UserTypeScreen = ({ route }) => {
 
   const handleContinue = () => {
     if (selectedOption) {
-      navigation.navigate('NextScreen', { userType: selectedOption });
+      navigation.navigate('EnterName', { userType: selectedOption });
     } else {
       alert('Please select an option before continuing.');
     }
   };
 
-  const options = ['Hire a Influencer', 'Creating a Influencer Profile', 'Create a Brand Profile'];
-
-  return (
-    <View style={styles.container}>
-      {/* Back Button */}
-      <TouchableOpacity style={styles.backButton} onPress={() => navigation.goBack()}>
-        <Icon name="chevron-back" size={normalize(16)} style={styles.backButtonIcon} />
-      </TouchableOpacity>
-
-      {/* Top Image */}
-      <Image
-        source={require('../../assets/images/login/signuptitle.png')}
-        style={styles.topImage}
-        resizeMode="contain"
-      />
-
-      {/* Title and Instruction */}
-      <Text style={styles.titleText}>I am looking for...</Text>
-      <Text style={styles.instructionText}>
-        Provide us with further insights into your preferences
-      </Text>
-
-      {/* Radio Buttons */}
+  const renderRadioButtons = () => (
+    <View>
       {options.map((option) => (
         <TouchableOpacity
           key={option}
@@ -71,61 +49,26 @@ const UserTypeScreen = ({ route }) => {
           />
         </TouchableOpacity>
       ))}
-
-      {/* Verify Button */}
-      <View style={styles.continueButton}>
-        <ContinueButton
-          onPress={handleContinue}
-          buttonImage={require('../../assets/images/login/continue.png')}
-          pageLevelImage={require('../../assets/images/signup/page1.png')}
-        />
-      </View>
     </View>
+  );
+
+  return (
+    <ConfigurableScreen
+      topImage={require('../../assets/images/signup/signuptitle.png')}
+      title="I am looking for..."
+      subtitle="Provide us with further insights into your preferences"
+      entryComponent={renderRadioButtons()}
+      bottomButtonImage={require('../../assets/images/login/continue.png')}
+      bottomIndicatorImage={require('../../assets/images/signup/page1.jpg')}
+      onBackPress={() => navigation.goBack()}
+      onButtonPress={handleContinue}
+    />
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
-    flexGrow: 1,
-    backgroundColor: '#ffffff',
-    alignItems: 'center',
-    paddingHorizontal: normalize(20),
-  },
-  backButton: {
-    position: 'absolute',
-    top: normalize(20),
-    left: normalize(20),
-    width: normalize(16),
-    height: normalize(16),
-    zIndex: 1,
-  },
-  backButtonIcon: {
-    color: '#000',
-    fontWeight: 'bold',
-    transform: [{ scaleY: 1.2 }],
-  },
-  topImage: {
-    width: width * 0.6,
-    height: width * 0.6,
-    marginTop: normalize(10),
-    marginBottom: normalize(20),
-  },
-  titleText: {
-    fontSize: normalize(20),
-    fontFamily: 'Poppins-Bold',
-    color: '#000000',
-    lineHeight: normalize(30),
-  },
-  instructionText: {
-    fontSize: normalize(14),
-    fontFamily: 'Poppins-Light',
-    color: 'black',
-    textAlign: 'center',
-    marginBottom: normalize(30),
-    lineHeight: normalize(21),
-  },
   radioButton: {
-    width: 0.9 * width,
+    //width: '90%',
     height: normalize(50),
     flexDirection: 'row',
     alignItems: 'center',
@@ -165,10 +108,6 @@ const styles = StyleSheet.create({
     borderColor: '#1e3a8a',
     backgroundColor: '#1e3a8a',
   },
-  continueButton: {
-    position: 'absolute',
-    bottom: normalize(40)
-  }
 });
 
 export default UserTypeScreen;
