@@ -93,7 +93,7 @@ const LoginScreen: React.FC = () => {
           resizeMode="contain"
         />
         <CustomButton onPress={() => {}} imageSrc={require('../../assets/images/login/facebook.png')} />
-        <CustomButton onPress={() => {}} imageSrc={require('../../assets/images/login/google.png')} />
+        <CustomButton onPress={handleGoogleLogin} imageSrc={require('../../assets/images/login/google.png')} />
         <View style={styles.signUpContainer}>
           <Text style={styles.signUpText}>Don’t have an account?</Text>
           <LinkToSignup />
