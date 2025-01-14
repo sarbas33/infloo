@@ -45,7 +45,6 @@ const EnterNameScreen = ({ route }) => {
       onButtonPress={handleContinue}
     />
     </KeyboardAvoidingView>
-    
   );
 };
 

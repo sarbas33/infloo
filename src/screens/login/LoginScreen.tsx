@@ -20,7 +20,7 @@ const LoginScreen: React.FC = () => {
 
   const handleCountrySelect = (newCountryCode: string, newCallingCode: string) => {
     setCountryCode(newCountryCode);
-    setCallingCode(newCallingCode);
+    setCallingCode('+' + newCallingCode);
   };
 
   const handleGoogleLogin = async () => {
