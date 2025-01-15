@@ -8,10 +8,14 @@ const UserTypeScreen = () => {
   const navigation = useNavigation();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
 
-  const options = ['Hire an Influencer', 'Creating an Influencer Profile', 'Create a Brand Profile'];
+  const options = [
+    { key: 'entrepreneur', label: 'Hire an Influencer' },
+    { key: 'influencer', label: 'Creating an Influencer Profile' },
+    { key: 'brand', label: 'Create a Brand Profile' },
+  ];  
 
-  const handleSelect = (option: string) => {
-    setSelectedOption(option);
+  const handleSelect = (key: string) => {
+    setSelectedOption(key);
   };
 
   const handleContinue = () => {
@@ -26,25 +30,25 @@ const UserTypeScreen = () => {
     <View>
       {options.map((option) => (
         <TouchableOpacity
-          key={option}
+          key={option.key}
           style={[
             styles.radioButton,
-            selectedOption === option && styles.selectedRadioButton,
+            selectedOption === option.key && styles.selectedRadioButton,
           ]}
-          onPress={() => handleSelect(option)}
+          onPress={() => handleSelect(option.key)}
         >
           <Text
             style={[
               styles.radioButtonText,
-              selectedOption === option ? styles.selectedText : styles.unselectedText,
+              selectedOption === option.key ? styles.selectedText : styles.unselectedText,
             ]}
           >
-            {option}
+            {option.label}
           </Text>
           <View
             style={[
               styles.radioCircle,
-              selectedOption === option && styles.selectedRadioCircle,
+              selectedOption === option.key && styles.selectedRadioCircle,
             ]}
           />
         </TouchableOpacity>
@@ -68,7 +72,6 @@ const UserTypeScreen = () => {
 
 const styles = StyleSheet.create({
   radioButton: {
-    //width: '90%',
     height: normalize(50),
     flexDirection: 'row',
     alignItems: 'center',

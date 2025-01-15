@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flexDirection: 'column',
     justifyContent: 'center',
-    marginTop: normalize(20),
+    marginTop: normalize(30),
     width: '100%',
     alignItems: 'center'
   },
@@ -117,7 +117,9 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontSize: normalize(14),
-    fontFamily: 'Poppins-Bold',
+    color: '#222222',
+    fontFamily: 'Poppins-Medium',
+    lineHeight: 27,
   },
   buttonImage: {
     //marginTop: normalize(20),

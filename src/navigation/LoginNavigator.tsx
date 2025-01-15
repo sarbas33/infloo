@@ -12,6 +12,7 @@ import OtpVerificationScreen2 from '../screens/signup/OtpVerificationScreen2';
 import CategorySelectionScreen from '../screens/signup/CategorySelectionScreen';
 import BrandPaymentScreen from '../screens/signup/BrandPaymentScreen';
 import VerifyingAccountScreen from '../screens/signup/VerifyingAccountScreen';
+import LocationScreen from '../screens/signup/LocationScreen';
 
 const Stack = createStackNavigator();
 
@@ -72,6 +73,11 @@ const LoginNavigator = () => {
          <Stack.Screen
           name="VerifyingAccount"
           component={VerifyingAccountScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Location"
+          component={LocationScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

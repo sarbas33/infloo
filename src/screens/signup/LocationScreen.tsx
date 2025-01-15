@@ -6,7 +6,7 @@ const LocationScreen = ({ route }) => {
   const { userType, phoneNumber, callingCode, email } = route.params;
   // Dummy method for the button
   const handleGetStarted = () => {
-    Alert.alert('Button Pressed', 'Get Started button was pressed!');
+    Alert.alert('Coming Soon',  'Coming sooon!');
   };
 
   return (

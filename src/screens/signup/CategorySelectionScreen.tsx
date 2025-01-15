@@ -44,11 +44,26 @@ const CategorySelectionScreen = ({ route }) => {
       Alert.alert('Select at least one category');
       console.log(route.params)
     } else {
-      navigation.navigate('BrandPayment', {
-        userType,
-        selectedCategories,
-        phoneNumber, callingCode, email
-      });
+      if (userType === "brand"){
+        navigation.navigate('BrandPayment', {
+          userType,
+          selectedCategories,
+          phoneNumber, callingCode, email
+        });
+      } else if (userType === "influencer"){
+        navigation.navigate('VerifyingAccount', {
+          userType,
+          selectedCategories,
+          phoneNumber, callingCode, email
+        });
+      } else {
+        navigation.navigate('Location', {
+          userType,
+          selectedCategories,
+          phoneNumber, callingCode, email
+        });
+      }
+      
     }
   };
 
