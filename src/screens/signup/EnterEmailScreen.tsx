@@ -6,15 +6,15 @@ import { useNavigation } from '@react-navigation/native';
 
 const EnterEmailScreen = ({ route }) => {
   const navigation = useNavigation();
-  const [name, setName] = useState('');
+  const [email, setName] = useState('');
 
-  const { userType } = route.params;
+  const { userType, phoneNumber, name, callingCode } = route.params;
 
   const handleContinue = () => {
-    if (name != "") {
-      Alert.alert("More pages coming soon");
-      return;
-      navigation.navigate('NextScreen', { userType: userType, name: name });
+    if (email != "") {
+      //Alert.alert("More pages coming soon");
+      //return;
+      navigation.navigate('CategorySelection', { userType, phoneNumber, name, callingCode, email });
     } else {
       alert('Enter an email');
     }
@@ -26,7 +26,7 @@ const EnterEmailScreen = ({ route }) => {
         style={styles.inputBox}
         placeholder="Enter your email"
         placeholderTextColor="#828282"
-        value={name}
+        value={email}
         onChangeText={(text) => setName(text)}
       />
     </View>

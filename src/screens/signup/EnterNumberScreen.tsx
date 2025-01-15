@@ -16,7 +16,7 @@ const EnterNumberScreen = ({ route }) => {
 
   const [countryCode, setCountryCode] = useState<string>('IN');
   const [callingCode, setCallingCode] = useState<string>('+91');
-  const { userType } = route.params;
+  const { userType, name } = route.params;
 
 
   const handleContinue = async () => {
@@ -36,7 +36,7 @@ const EnterNumberScreen = ({ route }) => {
       try {
         const response = await sendOtp(callingCode, phoneNumber);
         if (response.success) {
-          navigation.navigate('OtpVerification2', { type: "mobile" , phoneNumber , callingCode , email:"none", userType: userType });
+          navigation.navigate('OtpVerification2', { type: "mobile" , phoneNumber , callingCode , email:"none", userType: userType, name: name });
         } else {
           Alert.alert('Failed to send OTP. Please try again.');
         }

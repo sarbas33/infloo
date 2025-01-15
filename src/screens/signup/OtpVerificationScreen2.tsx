@@ -9,7 +9,7 @@ const { width } = Dimensions.get('window');
 
 const OtpVerificationScreen2 = ({ route }) => {
   const navigation = useNavigation();
-  const { type, phoneNumber, callingCode, email, userType } = route.params;
+  const { type, phoneNumber, callingCode, email, userType, name } = route.params;
   const [otp, setOtp] = useState(['', '', '', '']);
   const inputs = [];
 
@@ -74,7 +74,7 @@ const OtpVerificationScreen2 = ({ route }) => {
         if (enteredOtp.length === 4) {
           verifyOtp(enteredOtp).then((response) => {
             if (response?.success) {
-              navigation.navigate("EnterEmail", {userType: userType})
+              navigation.navigate("EnterEmail", {userType: userType, phoneNumber , callingCode, name})
             } else {
               alert('Invalid OTP, please try again.');
             }
