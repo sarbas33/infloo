@@ -44,7 +44,7 @@ const CategorySelectionScreen = ({ route }) => {
       Alert.alert('Select at least one category');
       console.log(route.params)
     } else {
-      navigation.navigate('NextScreen', {
+      navigation.navigate('BrandPayment', {
         userType,
         selectedCategories,
         phoneNumber, callingCode, email
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    //width: '45%',
     height: normalize(22),
     marginRight: normalize(10),
     marginBottom: normalize(20),

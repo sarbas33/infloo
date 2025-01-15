@@ -10,6 +10,8 @@ import EnterNumberScreen from '../screens/signup/EnterNumberScreen';
 import OtpVerificationScreen from '../screens/login/OtpVerificationScreen';
 import OtpVerificationScreen2 from '../screens/signup/OtpVerificationScreen2';
 import CategorySelectionScreen from '../screens/signup/CategorySelectionScreen';
+import BrandPaymentScreen from '../screens/signup/BrandPaymentScreen';
+import VerifyingAccountScreen from '../screens/signup/VerifyingAccountScreen';
 
 const Stack = createStackNavigator();
 
@@ -60,6 +62,16 @@ const LoginNavigator = () => {
         <Stack.Screen
           name="CategorySelection"
           component={CategorySelectionScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="BrandPayment"
+          component={BrandPaymentScreen}
+          options={{ headerShown: false }}
+        />
+         <Stack.Screen
+          name="VerifyingAccount"
+          component={VerifyingAccountScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
