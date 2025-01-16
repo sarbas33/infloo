@@ -51,13 +51,13 @@ const CategorySelectionScreen = ({ route }) => {
           phoneNumber, callingCode, email
         });
       } else if (userType === "influencer"){
-        navigation.navigate('VerifyingAccount', {
+        navigation.navigate('Location', {
           userType,
           selectedCategories,
           phoneNumber, callingCode, email
         });
       } else {
-        navigation.navigate('Location', {
+        navigation.navigate('Subscription', {
           userType,
           selectedCategories,
           phoneNumber, callingCode, email

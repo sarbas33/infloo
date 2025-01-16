@@ -2,13 +2,51 @@ import React from 'react';
 import { Alert } from 'react-native';
 import CenteredSignupScreen from './components/CenteredSignupScreen';
 import { useNavigation } from '@react-navigation/native';
+import { initiatePayment } from '../../services/payment';
 
-const BrandPaymentScreen = ({ route }) => {
-  const { userType, phoneNumber, callingCode, email } = route.params;
+interface RouteParams {
+  userType: string;
+  phoneNumber: string;
+  callingCode: string;
+  email: string;
+  selectedCategories: string[];
+}
+
+const BrandPaymentScreen = ({ route }: { route: { params: RouteParams } }) => {
+  const { userType, phoneNumber, callingCode, email, selectedCategories } = route.params;
   const navigation = useNavigation();
   
-  const handleGetStarted = () => {
-    navigation.navigate('VerifyingAccount', {});
+  const handleGetStarted = async () => {
+    const paymentDetails = {
+      planName: 'Brand Account',
+      amount: '1,000 ₹',
+      duration: 'lifetime',
+      userType,
+      phoneNumber,
+      email
+    };
+
+    try {
+      const response = await initiatePayment(paymentDetails);
+      
+      if (response.success) {
+        navigation.navigate('Location', {
+          userType,
+          phoneNumber,
+          callingCode,
+          email,
+          selectedCategories,
+          subscription: {
+            plan: 'Brand Account',
+            transactionId: response.transactionId
+          }
+        });
+      } else {
+        Alert.alert('Payment Failed', response.message || 'Please try again');
+      }
+    } catch (error) {
+      Alert.alert('Error', 'Something went wrong. Please try again.');
+    }
   };
 
   return (
@@ -23,7 +61,7 @@ const BrandPaymentScreen = ({ route }) => {
           onPress: handleGetStarted,
         },
       ]}
-      onBackPress={() => Alert.alert('Back Pressed', 'Navigating back!')}
+      onBackPress={() => navigation.goBack()}
     />
   );
 };

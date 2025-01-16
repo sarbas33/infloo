@@ -13,6 +13,7 @@ import CategorySelectionScreen from '../screens/signup/CategorySelectionScreen';
 import BrandPaymentScreen from '../screens/signup/BrandPaymentScreen';
 import VerifyingAccountScreen from '../screens/signup/VerifyingAccountScreen';
 import LocationScreen from '../screens/signup/LocationScreen';
+import SubscriptionScreen from '../screens/signup/SubscriptionScreen';
 
 const Stack = createStackNavigator();
 
@@ -78,6 +79,11 @@ const LoginNavigator = () => {
         <Stack.Screen
           name="Location"
           component={LocationScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Subscription"
+          component={SubscriptionScreen}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

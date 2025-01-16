@@ -11,7 +11,7 @@ const LocationScreen = ({ route }) => {
 
   return (
     <CenteredSignupScreen
-      topImage={require('../../assets/images/signup/creditcard.png')} // Replace with actual image path
+      topImage={require('../../assets/images/signup/location.png')} // Replace with actual image path
       title="Enable your location"
       subtitle="choose your location to start find stars around you"
       buttons={[
