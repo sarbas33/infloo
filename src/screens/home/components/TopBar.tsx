@@ -9,11 +9,11 @@ const TopBar: React.FC = () => {
         <Image source={require('../assets/icons/hamburger.png')} style={styles.icon} />
       </TouchableOpacity>
       <View style={styles.rightIcons}>
-        <TouchableOpacity>
+        <TouchableOpacity style={styles.circleIconContainer}>
           <Image source={require('../assets/icons/notification.png')} style={styles.icon} />
         </TouchableOpacity>
-        <TouchableOpacity>
-          <Image source={require('../assets/icons/search.png')} style={styles.circleIconContainer} />
+        <TouchableOpacity style={styles.circleIconContainer && styles.iconBG}>
+          <Image source={require('../assets/icons/search.png')} style={styles.circleIcon} />
         </TouchableOpacity>
       </View>
     </View>
@@ -34,7 +34,21 @@ const styles = StyleSheet.create({
     resizeMode: 'contain',
   },
   circleIconContainer: {
-    backgroundColor: 'blue',
+    width: normalize(36),
+    height: normalize(36),
+    borderRadius: normalize(18),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconBG: {
+    backgroundColor: '#194DAA',
+    width: normalize(36),
+    height: normalize(36),
+    borderRadius: normalize(18),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  circleIcon: {
     width: normalize(24),
     height: normalize(24),
     borderRadius: normalize(12),

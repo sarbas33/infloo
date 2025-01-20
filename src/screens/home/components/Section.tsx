@@ -15,13 +15,28 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
       name: 'James Carlo',
       profession: 'Video Creator',
       avatar: require('../assets/icons/user.jpg'),
-      domainImage: require('../assets/icons/technology.png'),
+      domainImage: require('../assets/icons/profilebg.jpg'),
+      location: 'Bangelore, India',
+      numFollowers: '20 K+',
+      description: 'Experienced business marketer with a proven track record in strategic planning and execution. '
     },
     {
       name: 'Ashna Jeev',
       profession: 'Brand Creator',
       avatar: require('../assets/icons/user.jpg'),
       domainImage: require('../assets/icons/profilebg.jpg'),
+      location: 'Kochi, Kerala',
+      numFollowers: '10 K+',
+      description: 'Experienced business marketer with a proven track record in strategic planning and execution. '
+    },
+    {
+      name: 'Ashna Jeev',
+      profession: 'Brand Creator',
+      avatar: require('../assets/icons/user.jpg'),
+      domainImage: require('../assets/icons/profilebg.jpg'),
+      location: 'Kochi, Kerala',
+      numFollowers: '10 K+',
+      description: 'Experienced business marketer with a proven track record in strategic planning and execution. '
     },
   ];
 
@@ -48,14 +63,14 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
 
 const styles = StyleSheet.create({
   section: {
-    marginVertical: normalize(10),
+    //marginVertical: normalize(10),
     paddingHorizontal: normalize(10),
   },
   title: {
     fontSize: normalize(14),
     fontFamily: 'Poppins-Bold',
     lineHeight: normalize(21),
-    marginBottom: normalize(10),
+    marginBottom: normalize(20),
   },
 });
 

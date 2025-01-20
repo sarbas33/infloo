@@ -1,6 +1,5 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Svg, { Path } from 'react-native-svg';
 import { normalize } from '../../../utils/utils';
 
 interface TabNavigationProps {
@@ -11,25 +10,27 @@ interface TabNavigationProps {
 const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }) => {
   return (
     <View style={styles.container}>
+      {/* Continuous Line */}
+      <View style={styles.lineContainer}>
+        <View style={styles.continuousLine} />
+        <View
+          style={[
+            styles.activeIndicator,
+            activeTab === 'Explore' ? styles.activeExplore : styles.activeEvents,
+          ]}
+        />
+      </View>
+
+      {/* Tabs */}
       <TouchableOpacity
-        style={[styles.tab, activeTab === 'Explore' && styles.activeTab]}
+        style={styles.tab}
         onPress={() => setActiveTab('Explore')}>
         <Text style={[styles.tabText, activeTab === 'Explore' && styles.activeTabText]}>Explore</Text>
-        {activeTab === 'Explore' && (
-          <Svg width="177" height="2" viewBox="0 0 177 2" fill="none">
-            <Path d="M0 1L176.5 1" stroke="#0A1F44" />
-          </Svg>
-        )}
       </TouchableOpacity>
       <TouchableOpacity
-        style={[styles.tab, activeTab === 'Events' && styles.activeTab]}
+        style={styles.tab}
         onPress={() => setActiveTab('Events')}>
         <Text style={[styles.tabText, activeTab === 'Events' && styles.activeTabText]}>Events</Text>
-        {activeTab === 'Events' && (
-          <Svg width="177" height="2" viewBox="0 0 177 2" fill="none">
-            <Path d="M0 1L176.5 1" stroke="#0A1F44" />
-          </Svg>
-        )}
       </TouchableOpacity>
     </View>
   );
@@ -38,23 +39,54 @@ const TabNavigation: React.FC<TabNavigationProps> = ({ activeTab, setActiveTab }
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-around',
-    paddingVertical: normalize(10),
+    paddingVertical: normalize(5),
+    marginTop: normalize(5),
     elevation: normalize(3),
+    position: 'relative', // For positioning the line
   },
   tab: {
-    paddingVertical: normalize(10),
+    //paddingVertical: normalize(10),
     width: '45%',
-    borderRadius: normalize(5),
-  },
-  activeTab: {
-    //backgroundColor: '#007bff',
+    alignItems: 'center',
   },
   tabText: {
     fontSize: normalize(16),
-    fontWeight: 'bold',
+    lineHeight: normalize(24),
+    fontFamily: 'Poppins-Medium',
     color: '#000',
-    textAlign: 'center'
+    textAlign: 'center',
+  },
+  activeTabText: {
+    color: '#222222',
+  },
+  lineContainer: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: normalize(2),
+    alignItems: 'center'
+  },
+  continuousLine: {
+    backgroundColor: '#f0f0f0', // Default line color
+    height: '100%',
+    width: '94%',
+  },
+  activeIndicator: {
+    position: 'absolute',
+    bottom: 0,
+    height: '100%',
+    backgroundColor: '#222222',
+    marginHorizontal: '3%',
+    width: '47%', // Half the width for two tabs
+  },
+  activeExplore: {
+    left: 0,
+  },
+  activeEvents: {
+    right: 0,
   },
 });
 

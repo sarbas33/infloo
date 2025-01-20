@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, StyleSheet } from 'react-native';
 import Section from './Section';
+import { normalize } from '../../../utils/utils';
 
 const Explore: React.FC = () => {
   return (
@@ -13,6 +14,7 @@ const Explore: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
+    marginVertical: normalize(20),
   },
 });
 

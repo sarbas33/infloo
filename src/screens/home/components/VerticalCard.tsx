@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
     height: normalize(80),
     backgroundColor: '#fff',
     borderRadius: normalize(10),
-    marginVertical: normalize(10),
+    marginBottom: normalize(15),
     flexDirection: 'row',
     alignItems: 'center',
     elevation: normalize(3),
