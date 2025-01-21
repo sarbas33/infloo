@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   View,
   StyleSheet,
   FlatList,
   TouchableOpacity,
-  Dimensions,
   Text,
   Alert,
   Image
@@ -51,7 +50,7 @@ const CategorySelectionScreen = ({ route }) => {
           phoneNumber, callingCode, email
         });
       } else if (userType === "influencer"){
-        navigation.navigate('Location', {
+        navigation.navigate('VerifyingAccount', {
           userType,
           selectedCategories,
           phoneNumber, callingCode, email

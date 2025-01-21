@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TextInput, Image, Dimensions, KeyboardAvoidingView, Platform, Alert } from 'react-native';
-import { normalize } from '../../utils/utils';
+import { View, Text, StyleSheet, TextInput, Image, KeyboardAvoidingView, Platform, Alert } from 'react-native';
+import { normalize, getResponsiveWidth } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from './components/CustomButton';
 import { sendOtp } from '../../services/authService';
@@ -9,7 +9,7 @@ import CountryCodePicker from './components/CountryCodePicker';
 import { GoogleLogin } from '../../services/googleLogin';
 import LinkToSignup from './components/LinkToSignup';
 
-const { width } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 const LoginScreen: React.FC = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');

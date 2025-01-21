@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import CountryPicker, { Country } from 'react-native-country-picker-modal';
+import { normalize } from '../../../utils/utils';
 
 interface CountryCodePickerProps {
   countryCode: string;
@@ -49,12 +50,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   callingCodeText: {
-    fontSize: 14,
+    fontSize: normalize(14),
     fontFamily: 'Poppins-Medium',
     color: '#000',
   },
   icon: {
-    marginLeft: 8,
+    marginLeft: normalize(8),
   },
 });
 

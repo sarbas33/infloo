@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
-import { normalize } from '../../../utils/utils';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { getResponsiveWidth, normalize } from '../../../utils/utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const { width, height } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 interface ConfigurableScreenProps {
   topImage?: any; // Image at the top
@@ -98,6 +98,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Regular',
     color: '#606060',
     textAlign: 'center',
+    width: width * 0.8,
     //marginBottom: normalize(30),
   },
   buttonContainer: {
@@ -113,7 +114,7 @@ const styles = StyleSheet.create({
     marginHorizontal: normalize(10),
   },
   imageButton: {
-    width: '100%',
+    //width: '100%',
   },
   buttonText: {
     fontSize: normalize(14),

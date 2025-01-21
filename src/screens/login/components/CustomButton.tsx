@@ -1,8 +1,8 @@
 import React from 'react';
-import { TouchableOpacity, Image, StyleSheet, ImageSourcePropType, GestureResponderEvent, ViewStyle, ImageStyle, Dimensions } from 'react-native';
-import { normalize } from '../../../utils/utils';
+import { TouchableOpacity, Image, StyleSheet, ImageSourcePropType, GestureResponderEvent, ViewStyle, ImageStyle } from 'react-native';
+import { normalize, getResponsiveWidth } from '../../../utils/utils';
 
-const { width, height } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 interface CustomButtonProps {
   onPress: (event: GestureResponderEvent) => void;

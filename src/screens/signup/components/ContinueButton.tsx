@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   pageLevel: {
-    marginTop: 15,
+    marginTop: normalize(15),
     width: normalize(87),
     height: normalize(7),
   },

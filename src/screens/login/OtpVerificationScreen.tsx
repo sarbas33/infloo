@@ -7,7 +7,6 @@ import {
   Image,
   TouchableOpacity,
   Alert,
-  Dimensions,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
@@ -15,12 +14,12 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import CustomButton from './components/CustomButton';
-import { normalize } from '../../utils/utils';
+import { normalize, getResponsiveWidth } from '../../utils/utils';
 import { sendOtp, sendOtpEmail, verifyOtp } from '../../services/authService';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const { width } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 const OtpVerificationScreen = ({ route }) => {
   const navigation = useNavigation();
@@ -208,7 +207,7 @@ const styles = StyleSheet.create({
     width: normalize(45),
     height: normalize(45),
     paddingBottom: 0,
-    borderWidth: 1,
+    borderWidth: normalize(1),
     borderTopWidth: 0,
     borderLeftWidth: 0,
     borderRightWidth: 0,

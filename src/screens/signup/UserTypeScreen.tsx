@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import ConfigurableScreen from './components/ConfigurableScreen';
-import { normalize } from '../../utils/utils';
+import { getResponsiveWidth, normalize } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
+
+const width = getResponsiveWidth();
 
 const UserTypeScreen = () => {
   const navigation = useNavigation();
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
-
+  
   const options = [
     { key: 'entrepreneur', label: 'Hire an Influencer' },
     { key: 'influencer', label: 'Creating an Influencer Profile' },
@@ -27,7 +29,7 @@ const UserTypeScreen = () => {
   };
 
   const renderRadioButtons = () => (
-    <View>
+    <View style={styles.radioContainer}>
       {options.map((option) => (
         <TouchableOpacity
           key={option.key}
@@ -71,8 +73,12 @@ const UserTypeScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  radioContainer: {
+    alignItems: 'center'
+  },
   radioButton: {
     height: normalize(50),
+    width: width * 0.9,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
     marginBottom: normalize(20),
     borderWidth: normalize(2),
     borderColor: '#464646',
-    borderRadius: 100,
+    borderRadius: normalize(100),
     backgroundColor: '#fff',
   },
   selectedRadioButton: {
@@ -88,9 +94,9 @@ const styles = StyleSheet.create({
   },
   radioButtonText: {
     fontFamily: 'Poppins-Medium',
-    fontSize: 14,
+    fontSize: normalize(14),
     fontWeight: '500',
-    lineHeight: 21,
+    lineHeight: normalize(21),
     textAlign: 'left',
   },
   selectedText: {
@@ -101,10 +107,10 @@ const styles = StyleSheet.create({
     opacity: 0.6,
   },
   radioCircle: {
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    borderWidth: 2,
+    width: normalize(20),
+    height: normalize(20),
+    borderRadius: normalize(10),
+    borderWidth: normalize(2),
     borderColor: '#6b7280',
   },
   selectedRadioCircle: {

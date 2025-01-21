@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
-import { normalize } from '../../utils/utils';
+import { normalize, getResponsiveWidth } from '../../utils/utils';
 import LinkToSignup from './components/LinkToSignup';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -64,6 +65,7 @@ const styles = StyleSheet.create({
     lineHeight: normalize(33),
     textAlign: 'center',
     marginBottom: normalize(15),
+    width: width * 0.9,
   },
   subtitle: {
     fontFamily: 'Poppins-Regular',
@@ -73,6 +75,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#6b7280',
     paddingHorizontal: '5%',
+    width: width * 0.9,
   },
   buttonContainer: {
     alignItems: 'center',

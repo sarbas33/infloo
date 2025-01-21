@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, Dimensions } from 'react-native';
-import { normalize } from '../../../utils/utils';
+import { normalize, getResponsiveWidth } from '../../../utils/utils';
 import ContinueButton from './ContinueButton'
 import Icon from 'react-native-vector-icons/Ionicons';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 interface ConfigurableScreenProps {
   topImage?: any; // Image at the top
@@ -82,6 +83,8 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontSize: normalize(20),
+    width: width * 0.9 ,
+    textAlign: 'center',
     fontFamily: 'Poppins-Bold',
     color: '#000000',
     lineHeight: normalize(30),
@@ -90,6 +93,7 @@ const styles = StyleSheet.create({
     fontSize: normalize(14),
     fontFamily: 'Poppins-Light',
     color: 'black',
+    width: width * 0.9 ,
     textAlign: 'center',
     marginBottom: normalize(30),
     lineHeight: normalize(21),

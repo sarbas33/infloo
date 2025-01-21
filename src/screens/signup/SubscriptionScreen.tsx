@@ -8,12 +8,13 @@ import {
   Alert,
   Image
 } from 'react-native';
-import { normalize } from '../../utils/utils';
+import { getResponsiveWidth, normalize } from '../../utils/utils';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { initiatePayment } from '../../services/payment';
 
-const { width, height } = Dimensions.get('window');
+const { height } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 const SubscriptionScreen = ( {route} ) => {
   const navigation = useNavigation();
@@ -73,6 +74,7 @@ const SubscriptionScreen = ( {route} ) => {
        <TouchableOpacity style={styles.backButton} onPress={onBackPress}>
         <Icon name="chevron-back" size={normalize(16)} style={styles.backButtonIcon} />
       </TouchableOpacity>
+      <View style= {styles.innerContainer}>
       <Text style={styles.title}>Enjoy the premium</Text>
       <Text style={styles.subtitle}>
         Effortlessly subscribe to stay updated with our latest features and
@@ -131,6 +133,7 @@ const SubscriptionScreen = ( {route} ) => {
       <TouchableOpacity style={styles.continueButton} onPress={handleContinue}>
         <Image source={require('../../assets/images/login/continue.png')} style={styles.continueButtonImage} />
       </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -140,7 +143,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     padding: normalize(20),
-    
+    alignItems: 'center',
+  },
+  innerContainer: {
+    width: width* 0.9,
   },
   backButton: {
     position: 'absolute',
@@ -159,11 +165,13 @@ const styles = StyleSheet.create({
     fontSize: normalize(20),
     fontFamily: 'Poppins-Bold',
     marginTop: normalize(30),
+    paddingHorizontal: normalize(5),
   },
   subtitle: {
     fontSize: normalize(12),
     fontFamily: 'Poppins-Light',
     marginBottom: normalize(20),
+    paddingHorizontal: normalize(5),
   },
   planContainer: {
     borderWidth: normalize(2),

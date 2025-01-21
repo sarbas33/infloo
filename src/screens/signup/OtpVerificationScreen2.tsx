@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Dimensions } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
 import ConfigurableScreen from './components/ConfigurableScreen'; // Adjust path if needed
-import { normalize } from '../../utils/utils';
+import { getResponsiveWidth, normalize } from '../../utils/utils';
 import { useNavigation } from '@react-navigation/native';
 import { sendOtp, verifyOtp } from '../../services/authService';
 
-const { width } = Dimensions.get('window');
+const width = getResponsiveWidth();
 
 const OtpVerificationScreen2 = ({ route }) => {
   const navigation = useNavigation();
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     width: normalize(45),
     height: normalize(45),
     paddingBottom: normalize(0),
-    borderBottomWidth: 1,
+    borderBottomWidth: normalize(1),
     textAlign: 'center',
     fontSize: normalize(22),
     fontFamily: 'Poppins-Medium',

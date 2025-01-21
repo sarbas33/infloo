@@ -1,5 +1,6 @@
 import { TouchableOpacity, StyleSheet, Text } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { normalize } from '../../../utils/utils';
 
 const LinkToSignup = () => {  
   const navigation = useNavigation();
@@ -22,6 +23,7 @@ const styles = StyleSheet.create({
       },
       signUpLink: {
         fontFamily: 'Poppins-Bold',
+        fontSize: normalize(14),
         color: '#1e3a8a',
         padding: 0,
       },
