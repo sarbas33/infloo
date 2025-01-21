@@ -1,8 +1,8 @@
 import { Dimensions, PixelRatio } from 'react-native';
 
 const { width, height } = Dimensions.get('window');
-const aspectRatio = height / width;
-//const aspectRatio = 2.5;
+var aspectRatio = height / width;
+//aspectRatio = 1.3;
 const scale = width / 360;
 const adjustmentFactor = aspectRatio < 1.8 ? (aspectRatio/1.8) : 1;
 

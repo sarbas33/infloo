@@ -9,7 +9,8 @@ import HomeIcon from '../assets/navigation/home.png';
 import FavouritesIcon from '../assets/navigation/favorite.png';
 import MessagesIcon from '../assets/navigation/chat.png';
 import ProfileIcon from '../assets/navigation/profile.png';
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, View } from 'react-native';
+import { normalize } from '../utils/utils';
 
 const Tab = createBottomTabNavigator();
 
@@ -21,9 +22,10 @@ const AppNavigator: React.FC = () => {
                 screenOptions={{ 
                     headerShown: false,
                     tabBarStyle: { 
-                        height: 64, 
+                        height: normalize(64), 
                         backgroundColor: '#FBFBFB',
-                        justifyContent: 'center' 
+                        justifyContent: 'center', 
+                        alignItems: 'center'
                     } 
                 }}
             >
@@ -70,9 +72,9 @@ const AppNavigator: React.FC = () => {
 
 const styles = StyleSheet.create({
     icon: {
-        width: 32,
-        height: 32,
-        top: 15,
+        width: normalize(32),
+        height: normalize(32),
+        marginTop: normalize(16),
         opacity: 0.6,
     },
 });
