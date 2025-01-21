@@ -67,7 +67,7 @@ const OtpVerificationScreen2 = ({ route }) => {
       subtitle={`Enter the OTP sent to ${type === 'mobile' ? `${callingCode} ${phoneNumber}` : '********@gmail.com'}`}
       entryComponent={entryComponent}
       bottomButtonImage={require('../../assets/images/login/verifybutton.png')}
-      bottomIndicatorImage={require('../../assets/images/signup/page5.jpg')}
+      bottomIndicatorImage={require('../../assets/images/signup/page4.jpg')}
       onBackPress={() => navigation.goBack()}
       onButtonPress={() => {
         const enteredOtp = otp.join('');

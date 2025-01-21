@@ -101,7 +101,7 @@ const CategorySelectionScreen = ({ route }) => {
         />
       }
       bottomButtonImage={require('../../assets/images/login/continue.png')}
-      bottomIndicatorImage={require('../../assets/images/signup/page3.jpg')}
+      bottomIndicatorImage={require('../../assets/images/signup/page6.jpg')}
       onBackPress={() => navigation.goBack()}
       onButtonPress={handleContinue}
     />
