@@ -1,10 +1,12 @@
 import React, { useRef, useState } from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions, FlatList } from 'react-native';
 import { normalize } from '../../../utils/utils';
+import { addFavorites } from '../../../services/profileService';
 
 const screenWidth = Dimensions.get('window').width;
 
 interface HorizontalCardProps {
+  id: string;
   name: string;
   profession: string;
   avatar: any;
@@ -13,18 +15,46 @@ interface HorizontalCardProps {
   description: string;
   numFollowers: string;
   isFavorite?: boolean;
+  addFavorite: (id: string, newState: boolean) => Promise<boolean>;
 }
 
-const HorizontalCard: React.FC<HorizontalCardProps> = ({ name, profession, avatar, domainImage, location, description, isFavorite, numFollowers }) => {
+const HorizontalCard: React.FC<HorizontalCardProps> = ({
+  id,
+  name,
+  profession,
+  avatar,
+  domainImage,
+  location,
+  description,
+  isFavorite = false,
+  numFollowers,
+  addFavorite,
+}) => {
+  const [favoriteState, setFavoriteState] = useState(isFavorite);
+
+  const handleFavoritePress = async () => {
+    const newState = !favoriteState;
+    const response = await addFavorites(id, newState);
+    if (response?.success) {
+      setFavoriteState(newState);
+    } else {
+      //
+    }
+  };
+
   return (
     <View style={styles.card}>
       <Image source={domainImage} style={styles.domainImage} />
-      <TouchableOpacity style={styles.favoriteButton}>
-          <Image
-            source={isFavorite ? require('../assets/icons/technology.png') : require('../assets/icons/favorite.png')}
-            style={styles.favoriteIcon}
-          />
-        </TouchableOpacity>
+      <TouchableOpacity style={styles.favoriteButton} onPress={handleFavoritePress}>
+        <Image
+          source={
+            favoriteState
+              ? require('../assets/icons/favorite_on.jpeg') // Updated state icon
+              : require('../assets/icons/favorite.png')
+          }
+          style={styles.favoriteIcon}
+        />
+      </TouchableOpacity>
       <View style={styles.content}>
         <Image source={avatar} style={styles.profileImage} />
         <View style={styles.textContainer}>
@@ -61,7 +91,7 @@ const HorizontalCardList: React.FC<HorizontalCardListProps> = ({ data }) => {
       <FlatList
         ref={flatListRef}
         data={data}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id}
         horizontal
         showsHorizontalScrollIndicator={false}
         pagingEnabled
@@ -100,7 +130,6 @@ const styles = StyleSheet.create({
     height: normalize(75),
   },
   content: {
-    //flexDirection: 'row',
     alignItems: 'flex-start',
     paddingLeft: normalize(20),
     marginTop: -normalize(34),
@@ -156,21 +185,6 @@ const styles = StyleSheet.create({
     width: normalize(36),
     height: normalize(36),
   },
-  paginationContainer: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginVertical: normalize(10),
-  },
-  dot: {
-    width: normalize(8),
-    height: normalize(8),
-    borderRadius: normalize(4),
-    backgroundColor: '#ccc',
-    marginHorizontal: normalize(4),
-  },
-  activeDot: {
-    backgroundColor: '#333',
-  },
   descriptionContainer: {
     position: 'absolute',
     bottom: 5,
@@ -186,6 +200,21 @@ const styles = StyleSheet.create({
     fontFamily: 'Poppins-Light',
     fontSize: normalize(11),
     lineHeight: normalize(16),
+  },
+  paginationContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    marginVertical: normalize(10),
+  },
+  dot: {
+    width: normalize(8),
+    height: normalize(8),
+    borderRadius: normalize(4),
+    backgroundColor: '#ccc',
+    marginHorizontal: normalize(4),
+  },
+  activeDot: {
+    backgroundColor: '#333',
   },
 });
 

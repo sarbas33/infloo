@@ -1,27 +1,45 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
 import { normalize } from '../../../utils/utils';
+import { addFavorites } from '../../../services/profileService';
 
 const screenWidth = Dimensions.get('window').width;
 
 interface VerticalCardProps {
+  id: string;
   name: string;
   profession: string;
   avatar: any;
   isFavorite?: boolean;
 }
 
-const VerticalCard: React.FC<VerticalCardProps> = ({ name, profession, avatar, isFavorite }) => {
+const VerticalCard: React.FC<VerticalCardProps> = ({ id, name, profession, avatar, isFavorite = false }) => {
+  const [favoriteState, setFavoriteState] = useState(isFavorite);
+
+  const handleFavoritePress = async () => {
+    const newState = !favoriteState; // Reverse the current state
+    const success = await addFavorites(id, newState); // Call service method
+    if (success) {
+      setFavoriteState(newState); // Update state if the request is successful
+    } else {
+      console.error('Failed to update favorite state.');
+    }
+  };
+
   return (
     <View style={styles.card}>
       <Image source={avatar} style={styles.profileImage} />
       <View style={styles.content}>
         <Text style={styles.name}>{name}</Text>
         <Text style={styles.profession}>{profession}</Text>
-        <TouchableOpacity style={styles.favoriteButton}>
+        <TouchableOpacity style={styles.favoriteButton} onPress={handleFavoritePress}>
           <Image
-            source={require('../assets/icons/favorite.png')}
-            style={[styles.favoriteIcon, isFavorite && { tintColor: 'red' }]}
+            source={
+              favoriteState
+                ? require('../assets/icons/favorite_on.jpeg')
+                : require('../assets/icons/favorite.png')
+            }
+            style={[styles.favoriteIcon]}
           />
         </TouchableOpacity>
       </View>
@@ -39,6 +57,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     elevation: normalize(3),
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
   },
   profileImage: {
     width: normalize(60),
@@ -55,12 +77,14 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     fontSize: normalize(14),
     lineHeight: normalize(21),
+    color: '#000',
   },
   profession: {
     fontFamily: 'Poppins-Regular',
     fontWeight: '400',
     fontSize: normalize(10),
     lineHeight: normalize(15),
+    color: '#666',
   },
   favoriteButton: {
     position: 'absolute',

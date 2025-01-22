@@ -18,12 +18,14 @@ import { normalize, getResponsiveWidth } from '../../utils/utils';
 import { sendOtp, sendOtpEmail, verifyOtp } from '../../services/authService';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { useAuth } from '../../contexts/AuthContext';
 
 const width = getResponsiveWidth();
 
 const OtpVerificationScreen = ({ route }) => {
   const navigation = useNavigation();
   const { type, phoneNumber, callingCode, email } = route.params;
+  const { setLoggedIn } = useAuth();
   const [otp, setOtp] = useState(['', '', '', '']);
 
   const handleInputChange = (index, value) => {
@@ -75,7 +77,7 @@ const OtpVerificationScreen = ({ route }) => {
     if (enteredOtp.length === 4) {
       const response = await verifyOtp(enteredOtp);
       if (response?.success == true){
-        Alert.alert('Success', 'Main pages coming soon');
+        setLoggedIn(true);
       } else {
         Alert.alert('Wrong OTP', 'Please try again!');
       }

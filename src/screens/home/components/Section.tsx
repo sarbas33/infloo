@@ -12,6 +12,7 @@ interface SectionProps {
 const Section: React.FC<SectionProps> = ({ title, type }) => {
   const data = [
     {
+      id: '454dsds',
       name: 'James Carlo',
       profession: 'Video Creator',
       avatar: require('../assets/icons/user.jpg'),
@@ -21,6 +22,7 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
       description: 'Experienced business marketer with a proven track record in strategic planning and execution. '
     },
     {
+      id: '454dsdssds',
       name: 'Ashna Jeev',
       profession: 'Brand Creator',
       avatar: require('../assets/icons/user.jpg'),
@@ -30,6 +32,7 @@ const Section: React.FC<SectionProps> = ({ title, type }) => {
       description: 'Experienced business marketer with a proven track record in strategic planning and execution. '
     },
     {
+      id: '454dsdrweds',
       name: 'Ashna Jeev',
       profession: 'Brand Creator',
       avatar: require('../assets/icons/user.jpg'),
